@@ -1,17 +1,25 @@
 import chokidar from 'chokidar'
 import fs from 'fs'
 import matter from 'gray-matter'
+import path from 'path'
 
 const watcher = chokidar.watch('./content', {
-  ignored: 'list',
-  persistent: true,
+  ignored: './content/list',
 })
-watcher.on('all', (event, path) => {
+let t = 0
+watcher.on('all', () => {
   let str = ''
-  console.log(path)
-  fs.readdirSync('./content/docs').forEach((fileContent) => {
-    const { data } = matter(fileContent)
-    str += `${data.date} ${path.replace('content/', '/')} ${data.title}\n`
-  })
-  fs.writeFileSync('./content/list', str)
+  clearInterval(t)
+  t = setTimeout(() => {
+    fs.readdirSync('./content/docs').forEach((fileContent) => {
+      console.log(path.join('./content/docs', fileContent), '2')
+      const { data } = matter(
+        fs.readFileSync(path.join('./content/docs', fileContent))
+      )
+      str += `${data.date} doc/${fileContent.replace('.md', '')} ${
+        data.title
+      }\n`
+    })
+    fs.writeFileSync('./content/list', str)
+  }, 1000)
 })

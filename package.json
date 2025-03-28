@@ -3,14 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack && node watcher.js",
+    "dev": "next dev --turbopack",
     "build": "next build",
-    "start": "next start",
+    "start": "next start && node watcher.mjs",
     "lint": "next lint"
   },
   "dependencies": {
     "chokidar": "^4.0.3",
     "gray-matter": "^4.0.3",
+    "hamburger-react": "^2.5.2",
     "next": "15.2.4",
     "postcss": "^8.5.3",
     "react": "^19.0.0",

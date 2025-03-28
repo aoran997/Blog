@@ -11,7 +11,7 @@ export default function Home({
 }: {
   titles: { title: string; date: string; name: string }[]
 }) {
-  'use cache'
+  // 'use cache'
 
   return (
     <main className="bg-white">
@@ -69,13 +69,16 @@ export default function Home({
 export const getServerSideProps: GetServerSideProps = async () => {
   const list = path.join(process.cwd(), 'content', 'list')
   const fileContent = fs.readFileSync(list, 'utf-8')
-  const titles = fileContent.split('\n').map((v) => {
-    return {
-      title: v.split(' ')[2],
-      date: v.split(' ')[0],
-      name: v.split(' ')[1],
-    }
-  })
+  const titles = fileContent
+    .trim()
+    .split('\n')
+    .map((v) => {
+      return {
+        date: v.split(' ')[0],
+        name: v.split(' ')[1],
+        title: v.split(' ')[2],
+      }
+    })
   return {
     props: {
       titles,

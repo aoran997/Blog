@@ -33,6 +33,7 @@ export const getServerSideProps: GetServerSideProps = async (
   const slug = context.query.slug
   const filePath = path.join(process.cwd(), 'content', 'docs', `${slug}.md`)
   const fileContent = fs.readFileSync(filePath, 'utf-8')
+  console.log(fileContent)
   const { data, content } = matter(fileContent)
   const processedContent = await remark().use(html).process(content)
   return {
