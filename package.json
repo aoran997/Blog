@@ -3,12 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev --turbopack && node watcher.js",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "chokidar": "^4.0.3",
     "gray-matter": "^4.0.3",
     "next": "15.2.4",
     "postcss": "^8.5.3",

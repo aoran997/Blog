@@ -4,7 +4,6 @@ import githubIcon from '@/assets/github-mark.svg'
 import Link from 'next/link'
 import path from 'path'
 import fs from 'fs'
-import matter from 'gray-matter'
 import { GetServerSideProps } from 'next'
 
 export default function Home({
@@ -43,7 +42,7 @@ export default function Home({
               </div>
             </h1>
             <p className="text-md text-gray-600 text-center max-w-2xl">
-              在这里，我记录一些工作日志以及学习见解
+              在这里，我记录一些遇到的问题以及学习见解
             </p>
           </div>
         </section>
@@ -51,10 +50,10 @@ export default function Home({
           {titles.map((v, index) => {
             return (
               <Link
-                href={'/doc/' + v.name}
+                href={v.name}
                 key={index}
                 popoverTarget="popover"
-                className="w-1/2 text-start rounded-md border-1 border-gray-200 p-1 hover:shadow-md"
+                className="md:w-1/2 sm:w-full max-sm:w-full transition-all text-start rounded-md border-1 border-gray-200 p-2 hover:shadow-md"
               >
                 <span>{v.date}</span>
                 <span className="ml-2">{v.title}</span>
@@ -68,12 +67,14 @@ export default function Home({
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const dirPath = path.join(process.cwd(), 'content', 'docs')
-  const filenames = fs.readdirSync(dirPath)
-  const titles = filenames.map((filename) => {
-    const fileContent = fs.readFileSync(path.join(dirPath, filename), 'utf-8')
-    const { data } = matter(fileContent)
-    return { ...data, name: filename.replace('.md', '') }
+  const list = path.join(process.cwd(), 'content', 'list')
+  const fileContent = fs.readFileSync(list, 'utf-8')
+  const titles = fileContent.split('\n').map((v) => {
+    return {
+      title: v.split(' ')[2],
+      date: v.split(' ')[0],
+      name: v.split(' ')[1],
+    }
   })
   return {
     props: {

@@ -16,11 +16,12 @@ export default function Page({
   date: string
 }) {
   return (
-    <article className="max-w-[80%] p-x-[10%] mx-auto py-10">
+    <article className="max-w-[80%] md:w-xl lg:w-2xl xl:w-3xl p-x-[10%] mx-auto py-10">
       <h1 className="text-primary-500 font-bold text-2xl">{title}</h1>
       <p className="text-gray-500">
         <Link href={'/'}>ZouAoran</Link> {date}
       </p>
+      <div className="h-[1px] bg-primary-200 w-full my-5 scale-x-110"></div>
       <div dangerouslySetInnerHTML={{ __html: processedContent.toString() }} />
     </article>
   )

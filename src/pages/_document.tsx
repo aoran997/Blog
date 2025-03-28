@@ -8,9 +8,13 @@ export default function Document() {
       <body className="antialiased">
         <Main />
         <NextScript />
-        <footer className="text-sm max-sm:flex-wrap absolute left-1/2 -translate-x-1/2 bottom-2 flex justify-between p-4 shadow-md border-1 border-gray-100 rounded-md gap-x-8">
+        <footer
+          className="text-sm max-sm:flex-wrap absolute left-1/2 
+        -translate-x-1/2 bottom-2 flex justify-between p-4 shadow-md border-1 
+        border-gray-100 rounded-md gap-x-2 max-[32rem]:w-[90%] max-sm:w-[70%] w-[45ch]"
+        >
           <div>Copyright © 2024-2025 ZouAoran</div>
-          <div>
+          <div className="whitespace-nowrap">
             <Link
               href="/"
               className="text-gray-500 hover:text-gray-700 transition-colors"
