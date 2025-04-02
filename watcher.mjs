@@ -11,10 +11,9 @@ watcher.on('all', () => {
   let str = ''
   clearInterval(t)
   t = setTimeout(() => {
-    fs.readdirSync('./content/docs').forEach((fileContent) => {
-      console.log(path.join('./content/docs', fileContent), '2')
+    fs.readdirSync('./content/doc').forEach((fileContent) => {
       const { data } = matter(
-        fs.readFileSync(path.join('./content/docs', fileContent))
+        fs.readFileSync(path.join('./content/doc', fileContent))
       )
       str += `${data.date} doc/${fileContent.replace('.md', '')} ${
         data.title

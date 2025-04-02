@@ -27,6 +27,7 @@ export default function Document() {
               |{' '}
               <Link
                 href="https://github.com/aoran997"
+                target="_blank"
                 className="text-gray-500 hover:text-primary-400 transition-colors"
               >
                 Github

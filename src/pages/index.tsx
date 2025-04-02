@@ -25,6 +25,7 @@ export default function Home({
                 <div className="group text-sm text-gray-500 hover:text-gray-700 mt-1">
                   <Link
                     className="flex items-center justify-start gap-1"
+                    target="_blank"
                     href="https://github.com/aoran997"
                   >
                     <div
@@ -46,7 +47,7 @@ export default function Home({
             </p>
           </div>
         </section>
-        <section className="flex flex-row justify-center items-center gap-4 mt-4">
+        <section className="flex flex-col justify-center items-center gap-4 mt-4">
           {titles.map((v, index) => {
             return (
               <Link
@@ -78,6 +79,9 @@ export const getServerSideProps: GetServerSideProps = async () => {
         name: v.split(' ')[1],
         title: v.split(' ')[2],
       }
+    })
+    .sort((a, b) => {
+      return new Date(b.date).getTime() - new Date(a.date).getTime()
     })
   return {
     props: {
